@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  ARITHMETIC_OPERATORS,
   CALCULATOR_CHARACTERS,
   CALCULATOR_OPERATORS,
 } from "@/constant/calculator";
@@ -14,15 +15,10 @@ const CalculatorMain: React.FC = () => {
   const { input, setInput, calculatedValue, setCalculatedValue } =
     useContext(CalculatorContext);
 
+  const [isComputed, setIsComputed] = useState<boolean>(false);
+
   const handleClick = (value: any) => {
     const lastChar = input.charAt(input.length - 1);
-
-    //return the current state if current input is operator and input last character is also operator
-    if (
-      CALCULATOR_OPERATORS.includes(value) &&
-      CALCULATOR_OPERATORS.includes(lastChar)
-    )
-      return;
 
     // no number yet and clicked operator
     if (input.length < 1 && CALCULATOR_OPERATORS.includes(value)) return;
@@ -30,6 +26,14 @@ const CalculatorMain: React.FC = () => {
     //if lastcharter and inputted button is the same
     if (lastChar === value && CALCULATOR_OPERATORS.includes(lastChar))
       return null;
+
+    //change arithmetic operator
+    if (
+      ARITHMETIC_OPERATORS.includes(value) &&
+      ARITHMETIC_OPERATORS.includes(lastChar)
+    ) {
+      return setInput(input.slice(0, -1) + value);
+    }
 
     //proceed to some action
     if (value === "=") {
@@ -63,6 +67,7 @@ const CalculatorMain: React.FC = () => {
       // Clearing the input and calculated fields
       setInput("");
       setCalculatedValue("");
+      setIsComputed(false);
     } else if (value === "⌫") {
       //remove last character
       setInput(input.slice(0, -1));
@@ -76,8 +81,16 @@ const CalculatorMain: React.FC = () => {
       <div className="w-80 px-6 pt-20 pb-2 rounded-2xl bg-black shadow-lg">
         {/* Display */}
         <div className="text-right text-white mb-4">
-          <div className="text-xs opacity-70 mb-1">{input || "0"}</div>
-          <div className="text-4xl font-bold">{calculatedValue || "0"}</div>
+          <div
+            className={`${
+              isComputed ? "scale-60 opacity-70" : "scale-100 opacity-100"
+            } mb-1 text-4xl font-bold transition-transform duration-500`}
+          >
+            {input || "0"}
+          </div>
+          <div className="text-4xl font-bold transition duration-500">
+            {calculatedValue || ""}
+          </div>
         </div>
         {/* Buttons */}
         <div className="grid grid-cols-4 gap-3">
