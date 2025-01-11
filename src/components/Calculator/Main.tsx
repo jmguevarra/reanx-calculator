@@ -99,7 +99,10 @@ const CalculatorMain: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex  flex-col justify-center items-center h-screen">
+      <h1 className="text-orange-500 font-bold mb-10 text-4xl">
+        Reanx Context Calculator
+      </h1>
       <div className="w-80 px-6 pt-20 pb-2 rounded-2xl bg-black shadow-lg relative overflow-hidden min-h-[532px]">
         {/* Display */}
         <div className="text-right text-white mb-4">
