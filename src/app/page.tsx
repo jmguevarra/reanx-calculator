@@ -1,10 +1,30 @@
-import Calculator from "@/components/Calculator";
+"use client";
 
-export default function Home() {
+import Calculator from "@/components/Calculator/Main";
+import CircularLoader from "@/components/Loaders/CircularLoader";
+import CalculatorContext from "@/shared/context/calculator";
+import { useEffect, useState } from "react";
+
+const Home = () => {
+  const [loading, setLoading] = useState<boolean>(true);
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 2000);
+  }, []);
+
+  if (loading) return <CircularLoader />;
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1>Calculator</h1>
-      <Calculator />
-    </div>
+    <>
+      <CalculatorContext.Provider
+        value={{
+          loading: loading,
+          setLoading: setLoading,
+        }}
+      >
+        <Calculator />
+      </CalculatorContext.Provider>
+    </>
   );
-}
+};
+
+export default Home;

@@ -1,0 +1,4 @@
+/* styles/custom.css */
+.custom-scroll {
+  @apply border-t-2 border-slate-400 p-3 rounded-xl mt-2 max-h-60 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-transparent hover:scrollbar-thumb-gray-700 scroll-smooth;
+}

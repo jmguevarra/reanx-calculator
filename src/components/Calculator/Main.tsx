@@ -1,18 +1,20 @@
 "use client";
 
 import { CALCULATOR_CHARACTERS } from "@/constant/calculator";
-import React, { useState } from "react";
+import { evaluate } from "mathjs";
+import React, { useEffect, useState } from "react";
+import CalculatorDrawerLogs from "./DrawerLogs";
 
-const Calculator: React.FC = () => {
+const CalculatorMain: React.FC = () => {
   const [input, setInput] = useState("");
   const [result, setResult] = useState("");
 
   const handleClick = (value: any) => {
     if (value === "=") {
       try {
-        setResult(eval(input)); // Caution: Avoid eval in production
-      } catch {
-        setResult("Error");
+        setResult(evaluate(input));
+      } catch (error) {
+        console.error("Error: ", error);
       }
     } else if (value === "C") {
       setInput("");
@@ -24,11 +26,11 @@ const Calculator: React.FC = () => {
 
   return (
     <div className="flex justify-center items-center">
-      <div className="w-80 p-5 rounded-2xl bg-black shadow-lg">
+      <div className="w-80 px-6 pt-20 pb-2 rounded-2xl bg-black shadow-lg">
         {/* Display */}
         <div className="text-right text-white mb-4">
-          <div className="text-sm opacity-70">{input || "0"}</div>
-          <div className="text-3xl font-bold">{result || "0"}</div>
+          <div className="text-xs opacity-70 mb-1">{input || "0"}</div>
+          <div className="text-4xl font-bold">{result || "0"}</div>
         </div>
         {/* Buttons */}
         <div className="grid grid-cols-4 gap-3">
@@ -36,7 +38,7 @@ const Calculator: React.FC = () => {
             <button
               key={btn}
               onClick={() => handleClick(btn)}
-              className={`text-xl font-semibold p-4 rounded-full ${
+              className={`text-xl font-semibold w-14 h-14 rounded-full flex justify-center items-center ${
                 btn === "="
                   ? "bg-gradient-to-r from-orange-400 to-red-500 text-white"
                   : btn === "C"
@@ -48,9 +50,10 @@ const Calculator: React.FC = () => {
             </button>
           ))}
         </div>
+        <CalculatorDrawerLogs></CalculatorDrawerLogs>
       </div>
     </div>
   );
 };
 
-export default Calculator;
+export default CalculatorMain;
