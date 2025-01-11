@@ -42,6 +42,14 @@ const CalculatorMain: React.FC = () => {
       return setInput(input.slice(0, -1) + value);
     }
 
+    // if the value is computed then set this actions
+    if (isComputed && ARITHMETIC_OPERATORS.includes(value) && calculatedValue) {
+      setIsComputed(false);
+      setInput(calculatedValue + value);
+      setCalculatedValue("");
+      return;
+    }
+
     //proceed to some action
     if (value === "=") {
       try {
@@ -73,6 +81,7 @@ const CalculatorMain: React.FC = () => {
           datetime: new Date(),
         };
         setLogs([...logs, logInfo]);
+        setIsComputed(true);
       } catch (error) {
         console.error("Error: ", error);
       }
@@ -96,8 +105,8 @@ const CalculatorMain: React.FC = () => {
         <div className="text-right text-white mb-4">
           <div
             className={`${
-              isComputed ? "scale-60 opacity-70" : "scale-100 opacity-100"
-            } mb-1 text-4xl font-bold transition-transform duration-500`}
+              isComputed ? "scale-50 opacity-70" : "scale-100 opacity-100"
+            } mb-1 text-4xl font-bold transform origin-right transition-transform duration-500`}
           >
             {input || "0"}
           </div>

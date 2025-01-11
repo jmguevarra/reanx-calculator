@@ -26,7 +26,7 @@ const CalculatorDrawerLogs = () => {
       </div>
       <div
         id="logs"
-        className={`custom-scroll overflow-hidden px-3 transition-all duration-500 ${
+        className={`custom-scroll  px-3 transition-all duration-500 ${
           showLogger ? "max-h-72 py-3" : "max-h-0 p-0"
         }`}
       >
