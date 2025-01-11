@@ -1,7 +1,7 @@
 "use client";
 
-import Calculator from "@/components/Calculator/Main";
-import CircularLoader from "@/components/Loaders/CircularLoader";
+import CalculatorMain from "@/components/calculators/main";
+import CircularLoader from "@/components/Loaders/circular-loader";
 import CalculatorContext from "@/shared/context/calculator";
 import { ICalculatorLog } from "@/shared/interfaces/calculator";
 import { useEffect, useState } from "react";
@@ -30,7 +30,7 @@ const Home = () => {
           setLogs,
         }}
       >
-        <Calculator />
+        <CalculatorMain />
       </CalculatorContext.Provider>
     </>
   );
