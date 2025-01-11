@@ -6,6 +6,9 @@ import CalculatorContext from "@/shared/context/calculator";
 import { useEffect, useState } from "react";
 
 const Home = () => {
+  const [input, setInput] = useState("");
+  const [calculatedValue, setCalculatedValue] = useState("");
+
   const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     setTimeout(() => setLoading(false), 2000);
@@ -17,8 +20,10 @@ const Home = () => {
     <>
       <CalculatorContext.Provider
         value={{
-          loading: loading,
-          setLoading: setLoading,
+          input,
+          setInput,
+          calculatedValue,
+          setCalculatedValue,
         }}
       >
         <Calculator />

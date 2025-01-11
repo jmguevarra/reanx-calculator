@@ -19,7 +19,22 @@
     ".",
     "%",
   ];
+  const ARITHMETIC_OPERATORS = [
+    "+",
+    "-",
+    "÷",
+    "×",
+  ]
+  const CALCULATOR_OPERATORS = [
+    ".",
+    "×",
+    "⌫",
+    ...ARITHMETIC_OPERATORS
+  ];
+
 
   export {
-    CALCULATOR_CHARACTERS
+    CALCULATOR_CHARACTERS,
+    CALCULATOR_OPERATORS,
+    ARITHMETIC_OPERATORS
   }
