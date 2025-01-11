@@ -1,3 +1,5 @@
+"use client";
+
 import CalculatorContext from "@/shared/context/calculator";
 import { ICalculatorLog } from "@/shared/interfaces/calculator";
 import { format } from "date-fns";
