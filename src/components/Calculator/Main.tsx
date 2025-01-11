@@ -9,11 +9,18 @@ import { evaluate, floor, format } from "mathjs";
 import React, { useContext, useState } from "react";
 import CalculatorDrawerLogs from "./DrawerLogs";
 import CalculatorContext from "@/shared/context/calculator";
+import { ICalculatorLog } from "@/shared/interfaces/calculator";
 
 const CalculatorMain: React.FC = () => {
   //descructuring context properties
-  const { input, setInput, calculatedValue, setCalculatedValue } =
-    useContext(CalculatorContext);
+  const {
+    input,
+    setInput,
+    calculatedValue,
+    setCalculatedValue,
+    setLogs,
+    logs,
+  } = useContext(CalculatorContext);
 
   const [isComputed, setIsComputed] = useState<boolean>(false);
 
@@ -60,6 +67,12 @@ const CalculatorMain: React.FC = () => {
         });
 
         setCalculatedValue(formattedResult);
+        const logInfo: ICalculatorLog = {
+          input: input,
+          computed: formattedResult,
+          datetime: new Date(),
+        };
+        setLogs([...logs, logInfo]);
       } catch (error) {
         console.error("Error: ", error);
       }
@@ -77,8 +90,8 @@ const CalculatorMain: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center">
-      <div className="w-80 px-6 pt-20 pb-2 rounded-2xl bg-black shadow-lg">
+    <div className="flex justify-center items-center h-screen">
+      <div className="w-80 px-6 pt-20 pb-2 rounded-2xl bg-black shadow-lg relative overflow-hidden min-h-[532px]">
         {/* Display */}
         <div className="text-right text-white mb-4">
           <div

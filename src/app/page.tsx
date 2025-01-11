@@ -3,11 +3,13 @@
 import Calculator from "@/components/Calculator/Main";
 import CircularLoader from "@/components/Loaders/CircularLoader";
 import CalculatorContext from "@/shared/context/calculator";
+import { ICalculatorLog } from "@/shared/interfaces/calculator";
 import { useEffect, useState } from "react";
 
 const Home = () => {
   const [input, setInput] = useState("");
   const [calculatedValue, setCalculatedValue] = useState("");
+  const [logs, setLogs] = useState<ICalculatorLog[]>([]);
 
   const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
@@ -24,6 +26,8 @@ const Home = () => {
           setInput,
           calculatedValue,
           setCalculatedValue,
+          logs,
+          setLogs,
         }}
       >
         <Calculator />
